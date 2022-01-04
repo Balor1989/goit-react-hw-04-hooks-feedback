@@ -23,12 +23,12 @@ const App = () => {
                 setBad(prevState => prevState + 1)
                 break;
             default:
-                return
+                return;
         };
     };
 
     const countTotalFeedback = () => {
-        return good + neutral + bad
+        return good + neutral + bad;
     };
 
     const countPositiveFeedbackPercentage = () => {
@@ -36,9 +36,8 @@ const App = () => {
             return 0;
         }
         return (good * 100 / countTotalFeedback()).toFixed(0)
-    }
+    };
     
-
     return (
         <section className={s.feedbackSection}>
             <Section title={'Please leave feedback!'}>
@@ -58,49 +57,7 @@ const App = () => {
                 </Section>}
         </section>
     );
-}
+};
 
-
-
-
-
-
-
-
-
-
-// class App extends Component {
-
-//     state = {
-//         good: 0,
-//         neutral: 0,
-//         bad:0
-//     }
-    
-//     handleClick = (e) => {
-//         this.setState((prevState) => {
-//             return {
-//                 [e.target.name]: prevState[e.target.name] + 1,
-//             }
-//         })
-//     }
-//     countTotalFeedback = () => {
-//         const {good, bad, neutral} = this.state
-//         return good + neutral + bad
-//     }
-//     countPositiveFeedbackPercentage = () => {
-//         const { good } = this.state;
-//         if (!good) {
-//             return 0;
-//         }
-//         return (good * 100 / this.countTotalFeedback()).toFixed(0)
-//     }
-     
-//     render() {
-//         const { good, neutral, bad } = this.state
-//         return (
-//         )
-//     }
-// }
 
 export default App
