@@ -1,25 +1,106 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
+import FeedbackButtons from "./FeedbackButtons/FeedbackButton"
+import Section from "./Section/Section"
+import Statistics from "./Statistics/Statistics"
+import Notification from "./Notification/Notification"
+import s from './App.module.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [good, setGood] = useState(0);
+    const [neutral, setNeutral] = useState(0);
+    const [bad, setBad] = useState(0);
+
+    const handleClick = (e) => {
+        const { name } = e.target
+        switch (name) {
+            case 'good':
+                setGood(prevState => prevState + 1)
+                break;
+            case 'neutral':
+                setNeutral(prevState => prevState + 1)
+                break;
+            case 'bad':
+                setBad(prevState => prevState + 1)
+                break;
+            default:
+                return
+        };
+    };
+
+    const countTotalFeedback = () => {
+        return good + neutral + bad
+    };
+
+    const countPositiveFeedbackPercentage = () => {
+        if (!good) {
+            return 0;
+        }
+        return (good * 100 / countTotalFeedback()).toFixed(0)
+    }
+    
+
+    return (
+        <section className={s.feedbackSection}>
+            <Section title={'Please leave feedback!'}>
+                <FeedbackButtons
+                    options={['good', 'neutral', 'bad']}
+                    onHandleClick={handleClick}
+                />
+            </Section>
+            {countTotalFeedback() === 0
+                ? <Notification message={"No feedback given"} />
+                : <Section title={'Statistics'}>
+                    <Statistics
+                        options={[`Good: ${good} `, `Neutral: ${neutral}`, `Bad: ${bad}`]}
+                        onCountTotalFeedback={countTotalFeedback()}
+                        onCountPositiveFeedbackPercentage={countPositiveFeedbackPercentage()}
+                    />
+                </Section>}
+        </section>
+    );
 }
 
-export default App;
+
+
+
+
+
+
+
+
+
+// class App extends Component {
+
+//     state = {
+//         good: 0,
+//         neutral: 0,
+//         bad:0
+//     }
+    
+//     handleClick = (e) => {
+//         this.setState((prevState) => {
+//             return {
+//                 [e.target.name]: prevState[e.target.name] + 1,
+//             }
+//         })
+//     }
+//     countTotalFeedback = () => {
+//         const {good, bad, neutral} = this.state
+//         return good + neutral + bad
+//     }
+//     countPositiveFeedbackPercentage = () => {
+//         const { good } = this.state;
+//         if (!good) {
+//             return 0;
+//         }
+//         return (good * 100 / this.countTotalFeedback()).toFixed(0)
+//     }
+     
+//     render() {
+//         const { good, neutral, bad } = this.state
+//         return (
+//         )
+//     }
+// }
+
+export default App
