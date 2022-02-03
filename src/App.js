@@ -10,9 +10,8 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const handleClick = e => {
-    const { name } = e.target;
-    switch (name) {
+  const handleClick = button => {
+    switch (button) {
       case 'good':
         setGood(prevState => prevState + 1);
         break;
