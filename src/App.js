@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import FeedbackButtons from './FeedbackButtons/FeedbackButton';
-import Section from './Section/Section';
-import Statistics from './Statistics/Statistics';
-import Notification from './Notification/Notification';
+import FeedbackButtons from './components/FeedbackButtons/FeedbackButton';
+import Section from './components/Section/Section';
+import Statistics from './components/Statistics/Statistics';
+import Notification from './components/Notification/Notification';
 import s from './App.module.css';
 
 const App = () => {
